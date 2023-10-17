@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1>Info</h1>
+      <p>This webpage showcases a digital clock and a modal interface. The digital clock accurately displays the current time in a user-friendly format.</p>
+</div>
+    </div>
+  
+  </div>
+    <nav>
+        <h1>Digital Clock</h1>
+        <span class="material-symbols-outlined" id="info">
+            info
+            </span>
+    </nav>
+    <div class="border">
+    <div class="container">
+        <div class="box">
+        <div id="clock">
+
+        </div>
+        <div class="am-pm" id="amPm">
+            <div>
+                <p class="am"></p>
+            </div>
+            <div>
+                <p class="pm"></p>
+            </div>
+        </div>
+    </div>
+        <div id="currentDay"></div> 
+      
+        </div>
+    </div>
+    <footer id="footer">
+
+    </footer>
+    <script>
+           const timeElement = document.getElementById('clock');
+        function updateTime(){
+            const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        //format
+        const clockStr = `${hours.toString().padStart(2, '0')}: ${minutes.toString().padStart(2, '0')}: ${seconds.toString().padStart(2, '0')}`;
+        timeElement.innerHTML = `<p class='clck'>${clockStr}</p>`;
+        //set timeout
+            setTimeout(updateTime, 1000);
+     
+        }
+        updateTime();
+
+        function updateTime() {
+    const timeElement = document.getElementById('clock');
+    const amPmElement = document.getElementById('amPm');
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    // Determine if it's AM or PM
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert to 12-hour format
+    hours = hours % 12 || 12;
+
+    const clockStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    timeElement.innerHTML = `<p class='clck'>${clockStr}</p>`;
+    amPmElement.innerHTML = `<p>${amPm}</p>`;
+
+    // Update the current day
+    const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayElement = document.getElementById('currentDay');
+    dayElement.textContent = daysOfWeek[dayOfWeek];
+
+    setTimeout(updateTime, 1000);
+}
+
+updateTime();
+
+
+let date =  new Date().getFullYear();
+const footer = document.getElementById('footer');
+footer.innerHTML=`<p class="footer-text">${date} Ron El. </p>`;
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("info");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    </script>
+    <script src="date.js"></script>
+</body>
+</html>
